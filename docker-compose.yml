@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app/frontend
+      - ./frontend/Linkify-React:/app/frontend
       - /app/frontend/node_modules
     command: yarn run dev
     depends_on:
