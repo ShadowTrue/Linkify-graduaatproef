@@ -1,4 +1,4 @@
-module dev.azure.com/kacpertabaka/_git/Graduaatproef-Linkify
+module backend
 
 go 1.24.0
 
