@@ -17,39 +17,40 @@ type user struct {
 	username string
 	firstName string
 	lastName string
+	hashedpassword string
 	birthday time.Time
 	country *string
 	createdOn *time.Time
 }
+
 // Constructor for User
-func NewUser(id *uuid.UUID, email string,
-	 username string,firstName string,
-	lastName string, birthday time.Time,
-	 country *string, createdOn *time.Time) (*user, []error){
+func NewUser(id *uuid.UUID, email ,hashedpassword ,username ,firstName ,lastName string, birthday time.Time,country *string, createdOn *time.Time) (*user, []error){
 
 
 	//validates user parameters
-	errs := validateParams(email,username,firstName,lastName,birthday)
+	errs := validateParams(email,username,firstName,hashedpassword,lastName,birthday,)
 	
+	//return slice of errors
 	if(errs != nil){
 		return nil, errs
 	}
 
+	//assigns new UUID
 	if(id == nil){
 		newId := uuid.New()
 		id = &newId
 	}
-
+	//set creation date
 	if(createdOn == nil || createdOn.IsZero()){
 		now := time.Now().UTC()
 		createdOn = &now
 	}
 
-	return &user{id,email,username,firstName,lastName,birthday,country,createdOn},nil
+	return &user{id,email,username,firstName,lastName,hashedpassword,birthday,country,createdOn},nil
 }
 
 //Validation
-func validateParams(email ,username ,firstName ,lastName string, birthday time.Time) []error{
+func validateParams(email ,username ,firstName ,hashedpassword ,lastName string, birthday time.Time) []error{
 	var errs []error 
 	if(strings.TrimSpace(email) == ""){
 		errs = append(errs,errors.New("Email cannot be empty"))
@@ -66,7 +67,9 @@ func validateParams(email ,username ,firstName ,lastName string, birthday time.T
 	if(strings.TrimSpace(lastName) == ""){
 		errs = append(errs,errors.New("Last name cannot be empty"))
 	}
-
+	if(strings.TrimSpace(hashedpassword) == ""){
+		errs = append(errs, errors.New("Password cannot be empty"))
+	}
 	if(birthday.IsZero()){
 		errs = append(errs,errors.New("Birthday need to be set"))
 	}
