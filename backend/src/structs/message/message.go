@@ -1,14 +1,11 @@
 package message
 
 import (
+	"errors"
 	"time"
 
 	"github.com/google/uuid"
 )
-
-//"errors"
-//"strings"
-//
 
 type message struct {
 	id        uuid.UUID
@@ -19,9 +16,37 @@ type message struct {
 }
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
+	errs := validateParams(id, chatId, senderId, content, timeStamp)
 
+	if errs == nil {
+		return nil, errs
+	}
+
+	return &message{id, chatId, senderId, content, timeStamp}, nil
 }
 
+// Validates params and if errors occurs return slice with errors
 func validateParams(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) []error {
+	var errs []error
 
+	if id == uuid.Nil {
+		errs = append(errs, errors.New("id is required"))
+	}
+	if chatId == uuid.Nil {
+		errs = append(errs, errors.New("chatId is required"))
+	}
+	if senderId == uuid.Nil {
+		errs = append(errs, errors.New("senderId is required"))
+	}
+	if content == "" {
+		errs = append(errs, errors.New("content is required"))
+	}
+	if timeStamp.IsZero() {
+		errs = append(errs, errors.New("timeStamp is required"))
+	}
+
+	if len(errs) > 0 {
+		return errs
+	}
+	return nil
 }
