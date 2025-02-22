@@ -1,4 +1,4 @@
-package friend
+package models
 
 import (
 	"errors"
@@ -20,7 +20,7 @@ func NewFriend(id uuid.UUID, firstName, lastName, fullName string, birthday time
 		fullName = firstName + lastName
 	}
 
-	errs := validateParams(id, firstName, lastName, fullName, birthday)
+	errs := validateFriendParams(id, firstName, lastName, fullName, birthday)
 
 	if errs != nil {
 		return nil, errs
@@ -28,7 +28,7 @@ func NewFriend(id uuid.UUID, firstName, lastName, fullName string, birthday time
 	return &friend{id, firstName, lastName, fullName, birthday}, nil
 }
 
-func validateParams(id uuid.UUID, firstName, lastName, fullName string, birthday time.Time) []error {
+func validateFriendParams(id uuid.UUID, firstName, lastName, fullName string, birthday time.Time) []error {
 
 	var errs []error
 	if id == uuid.Nil {

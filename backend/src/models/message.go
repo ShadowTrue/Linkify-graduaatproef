@@ -1,4 +1,4 @@
-package message
+package models
 
 import (
 	"errors"
@@ -16,7 +16,7 @@ type message struct {
 }
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
-	errs := validateParams(id, chatId, senderId, content, timeStamp)
+	errs := validateMessageParams(id, chatId, senderId, content, timeStamp)
 
 	if errs != nil {
 		return nil, errs
@@ -26,7 +26,7 @@ func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.T
 }
 
 // Validates params and if errors occurs return slice with errors
-func validateParams(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) []error {
+func validateMessageParams(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) []error {
 	var errs []error
 
 	if id == uuid.Nil {

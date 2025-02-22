@@ -1,4 +1,4 @@
-package user
+package models
 
 import (
 	"errors"
@@ -27,7 +27,7 @@ type user struct {
 func NewUser(id uuid.UUID, email, hashedpassword, username, firstName, lastName string, birthday time.Time, country *string, createdOn *time.Time) (*user, []error) {
 
 	//validates user parameters
-	errs := validateParams(email, username, firstName, hashedpassword, lastName, birthday)
+	errs := validateUserParams(email, username, firstName, hashedpassword, lastName, birthday)
 
 	//return slice of errors
 	if errs != nil {
@@ -48,7 +48,7 @@ func NewUser(id uuid.UUID, email, hashedpassword, username, firstName, lastName 
 }
 
 // Validation
-func validateParams(email, username, firstName, hashedpassword, lastName string, birthday time.Time) []error {
+func validateUserParams(email, username, firstName, hashedpassword, lastName string, birthday time.Time) []error {
 	var errs []error
 	if strings.TrimSpace(email) == "" {
 		errs = append(errs, errors.New("Email cannot be empty"))
