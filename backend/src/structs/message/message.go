@@ -18,7 +18,7 @@ type message struct {
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
 	errs := validateParams(id, chatId, senderId, content, timeStamp)
 
-	if errs == nil {
+	if errs != nil {
 		return nil, errs
 	}
 
