@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -38,7 +39,7 @@ func validateMessageParams(id, chatId, senderId uuid.UUID, content string, timeS
 	if senderId == uuid.Nil {
 		errs = append(errs, errors.New("senderId is required"))
 	}
-	if content == "" {
+	if strings.TrimSpace(content) == "" {
 		errs = append(errs, errors.New("content is required"))
 	}
 	if timeStamp.IsZero() {

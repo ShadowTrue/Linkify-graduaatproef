@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"github.com/google/uuid"
+	"strings"
 	"time"
 )
 
@@ -20,31 +21,31 @@ func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName strin
 	if fullName == "" {
 		fullName = firstName + lastName
 	}
-
-	errs := validateFriendParams(id, firstName, lastName, fullName, birthday)
+	newFriend := &friend{id, profilePicture, firstName, lastName, fullName, birthday}
+	errs := validateFriendParams(newFriend)
 
 	if errs != nil {
 		return nil, errs
 	}
-	return &friend{id, profilePicture, firstName, lastName, fullName, birthday}, nil
+	return newFriend, nil
 }
 
-func validateFriendParams(id uuid.UUID, firstName, lastName, fullName string, birthday time.Time) []error {
+func validateFriendParams(f *friend) []error {
 
 	var errs []error
-	if id == uuid.Nil {
+	if f.id == uuid.Nil {
 		errs = append(errs, errors.New("id is required"))
 	}
-	if firstName == "" {
+	if strings.TrimSpace(f.firstName) == "" {
 		errs = append(errs, errors.New("firstName is required"))
 	}
-	if lastName == "" {
+	if strings.TrimSpace(f.lastName) == "" {
 		errs = append(errs, errors.New("lastName is required"))
 	}
-	if fullName == "" {
+	if strings.TrimSpace(f.fullName) == "" {
 		errs = append(errs, errors.New("fullName is required"))
 	}
-	if birthday.IsZero() {
+	if f.birthDate.IsZero() {
 		errs = append(errs, errors.New("birthDate is required"))
 	}
 

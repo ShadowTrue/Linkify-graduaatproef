@@ -5,70 +5,65 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 )
 
 type user struct {
 	id             uuid.UUID
 	profilePicture string
-	email          string `validate:"required,email"`
-	username       string `validate:"required"`
-	firstName      string `validate:"required"`
+	email          string
+	username       string
+	firstName      string
 	lastName       string
-	hashedPassword string    `validate:"required"`
-	birthday       time.Time `validate:"required,Datetime"`
+	hashedPassword string
+	birthday       time.Time
 	country        string
 	createdOn      time.Time
 }
 
 // Constructor for User
-func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firstName, lastName string, birthday time.Time, country *string, createdOn *time.Time) (*user, []error) {
-
-	//validates user parameters
-	errs := validateUserParams(email, username, firstName, hashedPassword, lastName, birthday)
-
-	//return slice of errors
-	if errs != nil {
-		return nil, errs
-	}
+func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firstName, lastName string, birthday time.Time, country string, createdOn time.Time) (*user, []error) {
 
 	//assigns new UUID
 	if id == uuid.Nil {
 		id = uuid.New()
 	}
 	//set creation date
-	if createdOn == nil || createdOn.IsZero() {
-		now := time.Now().UTC()
-		createdOn = &now
+	if createdOn.IsZero() {
+		createdOn = time.Now().UTC()
 	}
+	newUser := &user{id, profilePicture, email, username, firstName, lastName, hashedPassword, birthday, country, createdOn}
+	errs := validateUserParams(newUser)
 
-	return &user{id, profilePicture, email, username, firstName, lastName, hashedPassword, birthday, country, createdOn}, nil
+	if errs != nil {
+		return nil, errs
+	}
+	return newUser, nil
 }
 
 // Validation
-func validateUserParams(email, username, firstName, hashedPassword, lastName string, birthday time.Time) []error {
+func validateUserParams(u *user) []error {
 	var errs []error
-	if strings.TrimSpace(email) == "" {
+	if strings.TrimSpace(u.email) == "" {
 		errs = append(errs, errors.New("Email cannot be empty"))
 	}
 
-	if strings.TrimSpace(username) == "" {
+	if strings.TrimSpace(u.username) == "" {
 		errs = append(errs, errors.New("Username cannot be empty"))
 
 	}
 
-	if strings.TrimSpace(firstName) == "" {
+	if strings.TrimSpace(u.firstName) == "" {
 		errs = append(errs, errors.New("First name cannot be empty"))
 	}
 
-	if strings.TrimSpace(lastName) == "" {
+	if strings.TrimSpace(u.lastName) == "" {
 		errs = append(errs, errors.New("Last name cannot be empty"))
 	}
-	if strings.TrimSpace(hashedPassword) == "" {
+	if strings.TrimSpace(u.hashedPassword) == "" {
 		errs = append(errs, errors.New("Password cannot be empty"))
 	}
-	if birthday.IsZero() {
+	if u.birthday.IsZero() {
 		errs = append(errs, errors.New("Birthday need to be set"))
 	}
 
