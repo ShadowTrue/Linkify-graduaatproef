@@ -5,29 +5,28 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 )
 
-// Pointers are set so that params can be nil
-// Some fields are not required for example when registering
-// id is only generated after successfully registering same for createdOn
 type user struct {
 	id             uuid.UUID
-	email          string
-	username       string
-	firstName      string
+	profilePicture string
+	email          string `validate:"required,email"`
+	username       string `validate:"required"`
+	firstName      string `validate:"required"`
 	lastName       string
-	hashedpassword string
-	birthday       time.Time
-	country        *string
-	createdOn      *time.Time
+	hashedPassword string    `validate:"required"`
+	birthday       time.Time `validate:"required,Datetime"`
+	country        string
+	createdOn      time.Time
 }
 
 // Constructor for User
-func NewUser(id uuid.UUID, email, hashedpassword, username, firstName, lastName string, birthday time.Time, country *string, createdOn *time.Time) (*user, []error) {
+func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firstName, lastName string, birthday time.Time, country *string, createdOn *time.Time) (*user, []error) {
 
 	//validates user parameters
-	errs := validateUserParams(email, username, firstName, hashedpassword, lastName, birthday)
+	errs := validateUserParams(email, username, firstName, hashedPassword, lastName, birthday)
 
 	//return slice of errors
 	if errs != nil {
@@ -44,11 +43,11 @@ func NewUser(id uuid.UUID, email, hashedpassword, username, firstName, lastName 
 		createdOn = &now
 	}
 
-	return &user{id, email, username, firstName, lastName, hashedpassword, birthday, country, createdOn}, nil
+	return &user{id, profilePicture, email, username, firstName, lastName, hashedPassword, birthday, country, createdOn}, nil
 }
 
 // Validation
-func validateUserParams(email, username, firstName, hashedpassword, lastName string, birthday time.Time) []error {
+func validateUserParams(email, username, firstName, hashedPassword, lastName string, birthday time.Time) []error {
 	var errs []error
 	if strings.TrimSpace(email) == "" {
 		errs = append(errs, errors.New("Email cannot be empty"))
@@ -66,7 +65,7 @@ func validateUserParams(email, username, firstName, hashedpassword, lastName str
 	if strings.TrimSpace(lastName) == "" {
 		errs = append(errs, errors.New("Last name cannot be empty"))
 	}
-	if strings.TrimSpace(hashedpassword) == "" {
+	if strings.TrimSpace(hashedPassword) == "" {
 		errs = append(errs, errors.New("Password cannot be empty"))
 	}
 	if birthday.IsZero() {

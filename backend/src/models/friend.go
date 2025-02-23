@@ -7,14 +7,15 @@ import (
 )
 
 type friend struct {
-	id        uuid.UUID
-	firstName string
-	lastName  string
-	fullName  string
-	birthDate time.Time
+	id             uuid.UUID
+	profilePicture string
+	firstName      string
+	lastName       string
+	fullName       string
+	birthDate      time.Time
 }
 
-func NewFriend(id uuid.UUID, firstName, lastName, fullName string, birthday time.Time) (*friend, []error) {
+func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName string, birthday time.Time) (*friend, []error) {
 
 	if fullName == "" {
 		fullName = firstName + lastName
@@ -25,7 +26,7 @@ func NewFriend(id uuid.UUID, firstName, lastName, fullName string, birthday time
 	if errs != nil {
 		return nil, errs
 	}
-	return &friend{id, firstName, lastName, fullName, birthday}, nil
+	return &friend{id, profilePicture, firstName, lastName, fullName, birthday}, nil
 }
 
 func validateFriendParams(id uuid.UUID, firstName, lastName, fullName string, birthday time.Time) []error {

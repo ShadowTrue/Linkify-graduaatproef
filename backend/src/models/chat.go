@@ -14,7 +14,6 @@ type chat struct {
 func NewChat(id uuid.UUID, participants, admins []uuid.UUID) (*chat, []error) {
 
 	var errs []error
-
 	if id == uuid.Nil {
 		id = uuid.New()
 	}
