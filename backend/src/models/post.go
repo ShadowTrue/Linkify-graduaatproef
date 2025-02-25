@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"github.com/google/uuid"
+	"strings"
 	"time"
 )
 
@@ -39,7 +40,7 @@ func validatePost(pst *post) []error {
 	if pst.sender == uuid.Nil {
 		errs = append(errs, errors.New("sender is required"))
 	}
-	if pst.content == "" && pst.image == "" {
+	if strings.TrimSpace(pst.content) == "" && strings.TrimSpace(pst.image) == "" {
 		errs = append(errs, errors.New("content or image is required"))
 	}
 
