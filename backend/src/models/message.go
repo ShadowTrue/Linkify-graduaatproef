@@ -17,32 +17,34 @@ type message struct {
 }
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
-	errs := validateMessageParams(id, chatId, senderId, content, timeStamp)
+
+	newMessage := &message{id, chatId, senderId, content, timeStamp}
+	errs := validateMessageParams(newMessage)
 
 	if errs != nil {
 		return nil, errs
 	}
 
-	return &message{id, chatId, senderId, content, timeStamp}, nil
+	return newMessage, nil
 }
 
 // Validates params and if errors occurs return slice with errors
-func validateMessageParams(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) []error {
+func validateMessageParams(msg *message) []error {
 	var errs []error
 
-	if id == uuid.Nil {
+	if msg.id == uuid.Nil {
 		errs = append(errs, errors.New("id is required"))
 	}
-	if chatId == uuid.Nil {
+	if msg.chatId == uuid.Nil {
 		errs = append(errs, errors.New("chatId is required"))
 	}
-	if senderId == uuid.Nil {
+	if msg.senderId == uuid.Nil {
 		errs = append(errs, errors.New("senderId is required"))
 	}
-	if strings.TrimSpace(content) == "" {
+	if strings.TrimSpace(msg.content) == "" {
 		errs = append(errs, errors.New("content is required"))
 	}
-	if timeStamp.IsZero() {
+	if msg.timeStamp.IsZero() {
 		errs = append(errs, errors.New("timeStamp is required"))
 	}
 
