@@ -15,14 +15,13 @@ type user struct {
 	username       string
 	firstName      string
 	lastName       string
-	hashedPassword string
 	birthday       time.Time
 	country        string
 	createdOn      time.Time
 }
 
 // Constructor for User
-func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firstName, lastName string, birthday time.Time, country string, createdOn time.Time) (*user, []error) {
+func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName string, birthday time.Time, country string, createdOn time.Time) (*user, []error) {
 
 	//assigns new UUID
 	if id == uuid.Nil {
@@ -32,7 +31,7 @@ func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firs
 	if createdOn.IsZero() {
 		createdOn = time.Now().UTC()
 	}
-	newUser := &user{id, profilePicture, email, username, firstName, lastName, hashedPassword, birthday, country, createdOn}
+	newUser := &user{id, profilePicture, email, username, firstName, lastName, birthday, country, createdOn}
 	errs := validateUserParams(newUser)
 
 	if errs != nil {
@@ -45,26 +44,23 @@ func NewUser(id uuid.UUID, profilePicture, email, hashedPassword, username, firs
 func validateUserParams(u *user) []error {
 	var errs []error
 	if strings.TrimSpace(u.email) == "" {
-		errs = append(errs, errors.New("Email cannot be empty"))
+		errs = append(errs, errors.New("email cannot be empty"))
 	}
 
 	if strings.TrimSpace(u.username) == "" {
-		errs = append(errs, errors.New("Username cannot be empty"))
+		errs = append(errs, errors.New("username cannot be empty"))
 
 	}
 
 	if strings.TrimSpace(u.firstName) == "" {
-		errs = append(errs, errors.New("First name cannot be empty"))
+		errs = append(errs, errors.New("first name cannot be empty"))
 	}
 
 	if strings.TrimSpace(u.lastName) == "" {
-		errs = append(errs, errors.New("Last name cannot be empty"))
-	}
-	if strings.TrimSpace(u.hashedPassword) == "" {
-		errs = append(errs, errors.New("Password cannot be empty"))
+		errs = append(errs, errors.New("last name cannot be empty"))
 	}
 	if u.birthday.IsZero() {
-		errs = append(errs, errors.New("Birthday need to be set"))
+		errs = append(errs, errors.New("birthday need to be set"))
 	}
 
 	if len(errs) == 0 {

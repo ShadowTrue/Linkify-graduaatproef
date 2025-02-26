@@ -18,6 +18,9 @@ type message struct {
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
 
+	if(id == uuid.Nil){
+		id = uuid.New()
+	}
 	newMessage := &message{id, chatId, senderId, content, timeStamp}
 	errs := validateMessageParams(newMessage)
 
