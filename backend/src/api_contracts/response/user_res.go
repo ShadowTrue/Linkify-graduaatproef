@@ -7,14 +7,14 @@ import (
 )
 
 type UserRes struct {
-	id uuid.UUID
-	profilePicture string
-	email string
-	username string
-	firstName string
-	lastName string
-	birthday time.Time
-	country string
-	createdOn time.Time
+	Id uuid.UUID
+	ProfilePicture string
+	Email string
+	Username string
+	FirstName string
+	LastName string
+	Birthday time.Time
+	Country string
+	CreatedOn time.Time
 
 }

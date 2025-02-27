@@ -7,8 +7,8 @@ import (
 )
 
 type MessageReq struct{
-	chatId uuid.UUID
-	sender uuid.UUID
-	content string
-	timeStamp time.Time
+	ChatId uuid.UUID
+	Sender uuid.UUID
+	Content string
+	TimeStamp time.Time
 }

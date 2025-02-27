@@ -8,10 +8,10 @@ import (
 
 
 type FriendRes struct {
-	id uuid.UUID
-	profilePicture string
-	firstName string
-	lastName string
-	fullName string
-	birthDate time.Time
+	Id uuid.UUID
+	ProfilePicture string
+	FirstName string
+	LastName string
+	FullName string
+	BirthDate time.Time
 }

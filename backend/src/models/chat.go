@@ -7,9 +7,9 @@ import (
 )
 
 type Chat struct {
-	id           uuid.UUID
-	participants []uuid.UUID
-	admins       []uuid.UUID
+	Id           uuid.UUID
+	Participants []uuid.UUID
+	Admins       []uuid.UUID
 }
 
 func NewChat(id uuid.UUID, participants, admins []uuid.UUID) (*Chat, []error) {
@@ -17,7 +17,7 @@ func NewChat(id uuid.UUID, participants, admins []uuid.UUID) (*Chat, []error) {
 	if id == uuid.Nil {
 		id = uuid.New()
 	}
-	newChat := &Chat{id: id, participants: participants, admins: admins}
+	newChat := &Chat{Id: id, Participants: participants, Admins: admins}
 
 	ers := validateChat(newChat)
 	if ers != nil {
@@ -28,10 +28,10 @@ func NewChat(id uuid.UUID, participants, admins []uuid.UUID) (*Chat, []error) {
 
 func validateChat(c *Chat) []error {
 	var errs []error
-	if c.participants == nil {
+	if c.Participants == nil {
 		errs = append(errs, errors.New("participants cannot be nil"))
 	}
-	if c.admins == nil {
+	if c.Admins == nil {
 		errs = append(errs, errors.New("admins cannot be nil"))
 	}
 

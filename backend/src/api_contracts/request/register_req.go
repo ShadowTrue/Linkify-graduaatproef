@@ -1,10 +1,10 @@
 package request
 
 type RegisterReq struct {
-	password  string
-	email     string
-	username  string
-	firstName string
-	lastName  string
-	country   string
+	Password  string
+	Email     string
+	Username  string
+	FirstName string
+	LastName  string
+	Country   string
 }

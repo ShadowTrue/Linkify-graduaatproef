@@ -7,9 +7,9 @@ import (
 )
 
 type PostRes struct {
-	id uuid.UUID
-	sender uuid.UUID
-	content string
-	image string
-	timeStamp time.Time
+	Id uuid.UUID
+	Sender uuid.UUID
+	Content string
+	Image string
+	TimeStamp time.Time
 }

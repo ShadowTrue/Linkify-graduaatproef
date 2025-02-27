@@ -1,6 +1,6 @@
 package response
 
 type RegisterRes struct {
-	result bool
-	message string
+	Result  bool
+	Message string
 }

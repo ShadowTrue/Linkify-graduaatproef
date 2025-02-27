@@ -1,6 +1,6 @@
 package request
 
 type LoginReq struct {
-	email    string
-	password string
+	Email    string
+	Password string
 }

@@ -7,9 +7,9 @@ import (
 )
 
 type MessageRes struct {
-	id uuid.UUID
-	chatId uuid.UUID
-	senderId uuid.UUID
-	content string
-	timeStamp time.Time
+	Id uuid.UUID
+	ChatId uuid.UUID
+	SenderId uuid.UUID
+	Content string
+	TimeStamp time.Time
 }

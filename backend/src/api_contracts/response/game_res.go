@@ -8,9 +8,9 @@ import (
 )
 
 type GameRes struct{
-	id uuid.UUID
-	image string
-	name string
-	releaseDate time.Time
-	category enums.GameCategory
+	Id uuid.UUID
+	Image string
+	Name string
+	ReleaseDate time.Time
+	Category enums.GameCategory
 }

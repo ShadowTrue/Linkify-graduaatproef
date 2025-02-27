@@ -9,15 +9,15 @@ import (
 )
 
 type User struct {
-	id             uuid.UUID
-	profilePicture string
-	email          string
-	username       string
-	firstName      string
-	lastName       string
-	birthday       time.Time
-	country        string
-	createdOn      time.Time
+	Id             uuid.UUID
+	ProfilePicture string
+	Email          string
+	Username       string
+	FirstName      string
+	LastName       string
+	Birthday       time.Time
+	Country        string
+	CreatedOn      time.Time
 }
 
 // Constructor for User
@@ -43,23 +43,23 @@ func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName 
 // Validation
 func validateUserParams(u *User) []error {
 	var errs []error
-	if strings.TrimSpace(u.email) == "" {
+	if strings.TrimSpace(u.Email) == "" {
 		errs = append(errs, errors.New("email cannot be empty"))
 	}
 
-	if strings.TrimSpace(u.username) == "" {
+	if strings.TrimSpace(u.Username) == "" {
 		errs = append(errs, errors.New("username cannot be empty"))
 
 	}
 
-	if strings.TrimSpace(u.firstName) == "" {
+	if strings.TrimSpace(u.FirstName) == "" {
 		errs = append(errs, errors.New("first name cannot be empty"))
 	}
 
-	if strings.TrimSpace(u.lastName) == "" {
+	if strings.TrimSpace(u.LastName) == "" {
 		errs = append(errs, errors.New("last name cannot be empty"))
 	}
-	if u.birthday.IsZero() {
+	if u.Birthday.IsZero() {
 		errs = append(errs, errors.New("birthday need to be set"))
 	}
 

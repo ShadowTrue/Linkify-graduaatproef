@@ -9,11 +9,11 @@ import (
 )
 
 type Message struct {
-	id        uuid.UUID
-	chatId    uuid.UUID
-	senderId  uuid.UUID
-	content   string
-	timeStamp time.Time
+	Id        uuid.UUID
+	ChatId    uuid.UUID
+	SenderId  uuid.UUID
+	Content   string
+	TimeStamp time.Time
 }
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*Message, []error) {
@@ -35,19 +35,19 @@ func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.T
 func validateMessageParams(msg *Message) []error {
 	var errs []error
 
-	if msg.id == uuid.Nil {
+	if msg.Id == uuid.Nil {
 		errs = append(errs, errors.New("id is required"))
 	}
-	if msg.chatId == uuid.Nil {
+	if msg.ChatId == uuid.Nil {
 		errs = append(errs, errors.New("chatId is required"))
 	}
-	if msg.senderId == uuid.Nil {
+	if msg.SenderId == uuid.Nil {
 		errs = append(errs, errors.New("senderId is required"))
 	}
-	if strings.TrimSpace(msg.content) == "" {
+	if strings.TrimSpace(msg.Content) == "" {
 		errs = append(errs, errors.New("content is required"))
 	}
-	if msg.timeStamp.IsZero() {
+	if msg.TimeStamp.IsZero() {
 		errs = append(errs, errors.New("timeStamp is required"))
 	}
 

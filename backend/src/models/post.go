@@ -9,11 +9,11 @@ import (
 )
 
 type Post struct {
-	id        uuid.UUID
-	sender    uuid.UUID
-	content   string
-	image     string
-	timeStamp time.Time
+	Id        uuid.UUID
+	Sender    uuid.UUID
+	Content   string
+	Image     string
+	TimeStamp time.Time
 }
 
 func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (*Post, []error) {
@@ -36,10 +36,10 @@ func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (
 func validatePost(pst *Post) []error {
 	var errs []error
 
-	if pst.sender == uuid.Nil {
+	if pst.Sender == uuid.Nil {
 		errs = append(errs, errors.New("sender is required"))
 	}
-	if strings.TrimSpace(pst.content) == "" && strings.TrimSpace(pst.image) == "" {
+	if strings.TrimSpace(pst.Content) == "" && strings.TrimSpace(pst.Image) == "" {
 		errs = append(errs, errors.New("content or image is required"))
 	}
 

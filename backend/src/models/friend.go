@@ -9,12 +9,12 @@ import (
 )
 
 type Friend struct {
-	id             uuid.UUID
-	profilePicture string
-	firstName      string
-	lastName       string
-	fullName       string
-	birthDate      time.Time
+	Id             uuid.UUID
+	ProfilePicture string
+	FirstName      string
+	LastName       string
+	FullName       string
+	BirthDate      time.Time
 }
 
 func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName string, birthday time.Time) (*Friend, []error) {
@@ -34,19 +34,19 @@ func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName strin
 func validateFriendParams(f *Friend) []error {
 
 	var errs []error
-	if f.id == uuid.Nil {
+	if f.Id == uuid.Nil {
 		errs = append(errs, errors.New("id is required"))
 	}
-	if strings.TrimSpace(f.firstName) == "" {
+	if strings.TrimSpace(f.FirstName) == "" {
 		errs = append(errs, errors.New("firstName is required"))
 	}
-	if strings.TrimSpace(f.lastName) == "" {
+	if strings.TrimSpace(f.LastName) == "" {
 		errs = append(errs, errors.New("lastName is required"))
 	}
-	if strings.TrimSpace(f.fullName) == "" {
+	if strings.TrimSpace(f.FullName) == "" {
 		errs = append(errs, errors.New("fullName is required"))
 	}
-	if f.birthDate.IsZero() {
+	if f.BirthDate.IsZero() {
 		errs = append(errs, errors.New("birthDate is required"))
 	}
 
