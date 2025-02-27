@@ -2,9 +2,10 @@ package models
 
 import (
 	"errors"
-	"github.com/google/uuid"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type post struct {
@@ -16,8 +17,6 @@ type post struct {
 }
 
 func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (*post, []error) {
-	//TODO
-	//implement this
 	if id == uuid.Nil {
 		id = uuid.New()
 	}
