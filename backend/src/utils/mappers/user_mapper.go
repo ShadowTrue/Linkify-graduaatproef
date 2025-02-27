@@ -12,7 +12,16 @@ func MapUserToStruct(req request.UserReq) (*models.User,[]error){
 }
 
 func MapUserToRes(usr models.User) response.UserRes{
-	res := response.UserRes{usr.Id,usr.ProfilePicture,usr.Email,usr.Username,usr.FirstName,usr.LastName,usr.Birthday,usr.Country,usr.CreatedOn}
+	res := response.UserRes{
+		Id: usr.Id,
+		ProfilePicture: usr.ProfilePicture,
+		Email: usr.Email,
+		Username: usr.Username,
+		FirstName: usr.FirstName,
+		LastName: usr.LastName,
+		Birthday: usr.Birthday,
+		Country: usr.Country,
+		CreatedOn: usr.CreatedOn}
 	return res
 }
 
