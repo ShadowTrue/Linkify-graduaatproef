@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type user struct {
+type User struct {
 	id             uuid.UUID
 	profilePicture string
 	email          string
@@ -21,7 +21,7 @@ type user struct {
 }
 
 // Constructor for User
-func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName string, birthday time.Time, country string, createdOn time.Time) (*user, []error) {
+func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName string, birthday time.Time, country string, createdOn time.Time) (*User, []error) {
 
 	//assigns new UUID
 	if id == uuid.Nil {
@@ -31,7 +31,7 @@ func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName 
 	if createdOn.IsZero() {
 		createdOn = time.Now().UTC()
 	}
-	newUser := &user{id, profilePicture, email, username, firstName, lastName, birthday, country, createdOn}
+	newUser := &User{id, profilePicture, email, username, firstName, lastName, birthday, country, createdOn}
 	errs := validateUserParams(newUser)
 
 	if errs != nil {
@@ -41,7 +41,7 @@ func NewUser(id uuid.UUID, profilePicture, email, username, firstName, lastName 
 }
 
 // Validation
-func validateUserParams(u *user) []error {
+func validateUserParams(u *User) []error {
 	var errs []error
 	if strings.TrimSpace(u.email) == "" {
 		errs = append(errs, errors.New("email cannot be empty"))

@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type post struct {
+type Post struct {
 	id        uuid.UUID
 	sender    uuid.UUID
 	content   string
@@ -16,14 +16,14 @@ type post struct {
 	timeStamp time.Time
 }
 
-func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (*post, []error) {
+func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (*Post, []error) {
 	if id == uuid.Nil {
 		id = uuid.New()
 	}
 	if timeStamp.IsZero() {
 		timeStamp = time.Now().UTC()
 	}
-	newPost := &post{id, sender, content, image, timeStamp}
+	newPost := &Post{id, sender, content, image, timeStamp}
 
 	errs := validatePost(newPost)
 
@@ -33,7 +33,7 @@ func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (
 	return newPost, nil
 }
 
-func validatePost(pst *post) []error {
+func validatePost(pst *Post) []error {
 	var errs []error
 
 	if pst.sender == uuid.Nil {

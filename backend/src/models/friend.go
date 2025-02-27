@@ -2,12 +2,13 @@ package models
 
 import (
 	"errors"
-	"github.com/google/uuid"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
-type friend struct {
+type Friend struct {
 	id             uuid.UUID
 	profilePicture string
 	firstName      string
@@ -16,12 +17,12 @@ type friend struct {
 	birthDate      time.Time
 }
 
-func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName string, birthday time.Time) (*friend, []error) {
+func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName string, birthday time.Time) (*Friend, []error) {
 
 	if fullName == "" {
 		fullName = firstName + lastName
 	}
-	newFriend := &friend{id, profilePicture, firstName, lastName, fullName, birthday}
+	newFriend := &Friend{id, profilePicture, firstName, lastName, fullName, birthday}
 	errs := validateFriendParams(newFriend)
 
 	if errs != nil {
@@ -30,7 +31,7 @@ func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName strin
 	return newFriend, nil
 }
 
-func validateFriendParams(f *friend) []error {
+func validateFriendParams(f *Friend) []error {
 
 	var errs []error
 	if f.id == uuid.Nil {

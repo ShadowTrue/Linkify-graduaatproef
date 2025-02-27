@@ -3,12 +3,13 @@ package models
 import (
 	"backend/src/enums"
 	"errors"
-	"github.com/google/uuid"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
-type game struct {
+type Game struct {
 	id          uuid.UUID
 	image       string
 	name        string
@@ -16,9 +17,9 @@ type game struct {
 	category    enums.GameCategory
 }
 
-func NewGame(id uuid.UUID, image, name string, releaseDate time.Time, category enums.GameCategory) (*game, []error) {
+func NewGame(id uuid.UUID, image, name string, releaseDate time.Time, category enums.GameCategory) (*Game, []error) {
 
-	newGame := &game{id, image, name, releaseDate, category}
+	newGame := &Game{id, image, name, releaseDate, category}
 
 	errs := validateGame(newGame)
 
@@ -28,7 +29,7 @@ func NewGame(id uuid.UUID, image, name string, releaseDate time.Time, category e
 	return newGame, nil
 }
 
-func validateGame(game *game) []error {
+func validateGame(game *Game) []error {
 
 	var errs []error
 

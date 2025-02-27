@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type message struct {
+type Message struct {
 	id        uuid.UUID
 	chatId    uuid.UUID
 	senderId  uuid.UUID
@@ -16,12 +16,12 @@ type message struct {
 	timeStamp time.Time
 }
 
-func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*message, []error) {
+func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*Message, []error) {
 
 	if(id == uuid.Nil){
 		id = uuid.New()
 	}
-	newMessage := &message{id, chatId, senderId, content, timeStamp}
+	newMessage := &Message{id, chatId, senderId, content, timeStamp}
 	errs := validateMessageParams(newMessage)
 
 	if errs != nil {
@@ -32,7 +32,7 @@ func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.T
 }
 
 // Validates params and if errors occurs return slice with errors
-func validateMessageParams(msg *message) []error {
+func validateMessageParams(msg *Message) []error {
 	var errs []error
 
 	if msg.id == uuid.Nil {
