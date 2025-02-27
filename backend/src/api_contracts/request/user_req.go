@@ -1,10 +1,19 @@
 package request
 
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
+
 type UserReq struct {
-	profilePicture *string
-	email          *string
-	username       *string
-	firstName      *string
-	lastName       *string
-	country        *string
+	Id             uuid.UUID
+	ProfilePicture string
+	Email          string
+	Username       string
+	FirstName      string
+	LastName       string
+	Birthday       time.Time
+	Country        string
+	CreatedOn      time.Time
 }
