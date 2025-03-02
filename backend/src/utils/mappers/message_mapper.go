@@ -4,10 +4,12 @@ import (
 	"backend/src/api_contracts/request"
 	"backend/src/api_contracts/response"
 	"backend/src/models"
+
+	"github.com/google/uuid"
 )
 
 func MapMessageToStruct(req *request.MessageReq) (models.Message,[]error){
-	message,errs := models.NewMessage(req.Id,req.ChatId,req.Sender,req.Content,req.TimeStamp)
+	message,errs := models.NewMessage(uuid.Nil,req.ChatId,req.Sender,req.Content,req.TimeStamp)
 
 	return *message,errs
 }
