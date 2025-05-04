@@ -7,7 +7,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type UserRepo interface {
+type IUserRepo interface {
 	GetUserByGames(games []models.Game) (*[]models.User,error)
 	GetUserById(id uuid.UUID) (*models.User,error)
 	GetusersByGameCategories(cat []enums.GameCategory) (*[]models.User,error)

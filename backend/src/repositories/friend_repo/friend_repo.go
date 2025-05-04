@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type FriendRepo interface {
+type IFriendRepo interface {
 	GetFriendById(friendId models.Friend) (*models.Friend, error)
 	GetAllFriendByUserId(userId uuid.UUID) (*[]models.Friend,error)
 	AddFriend(friend models.Friend) error

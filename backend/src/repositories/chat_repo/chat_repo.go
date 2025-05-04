@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type ChatRepo interface{
+type IChatRepo interface{
 	GetChatById(chatId uuid.UUID) (*models.Chat,error)
 	GetAllChatByUserId(userId uuid.UUID) (*[]models.Chat,error)
 	CreateChat(chat models.Chat) error

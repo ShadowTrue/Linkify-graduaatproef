@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type PostRepo interface {
+type IPostRepo interface {
 	GetPostById(postId uuid.UUID) error
 	GetUserPosts(userId uuid.UUID) (*[]models.Post,error)
 	GetFriendsPosts(userId uuid.UUID) (*[]models.Post,error)

@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type MessageRepo interface {
+type IMessageRepo interface {
 	GetMessageById(messageId uuid.UUID,page int,limit int) (*models.Message,error)
 	GetMessagesByChat(chatId uuid.UUID) (*[]models.Message,error)
 	CreateMessage(message models.Message) error

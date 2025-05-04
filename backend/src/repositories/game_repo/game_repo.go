@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type GameRepo interface {
+type IGameRepo interface {
 	GetGameById(gameId uuid.UUID) (*models.Game,error)
 	GetAllGames() (*[]models.Game, error)
 	CreateGame(game models.Game) error
