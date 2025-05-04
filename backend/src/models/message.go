@@ -9,11 +9,11 @@ import (
 )
 
 type Message struct {
-	Id        uuid.UUID
-	ChatId    uuid.UUID
-	SenderId  uuid.UUID
-	Content   string
-	TimeStamp time.Time
+	Id        uuid.UUID `bson:"_id"`
+	ChatId    uuid.UUID `bson:"ChatId"`
+	SenderId  uuid.UUID `bson:"SenderId"`
+	Content   string `bson:"Content"`
+	TimeStamp time.Time `bson:"TimeStamp"`
 }
 
 func NewMessage(id, chatId, senderId uuid.UUID, content string, timeStamp time.Time) (*Message, []error) {

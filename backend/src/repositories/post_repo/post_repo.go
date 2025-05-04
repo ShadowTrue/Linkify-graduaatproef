@@ -7,12 +7,12 @@ import (
 )
 
 type PostRepo interface {
-	GetPostById(postId uuid.UUID)
-	GetUserPosts(userId uuid.UUID) *[]models.Post
-	GetFriendsPosts(userId uuid.UUID) *[]models.Post
-	GetLatestPostsByRandomUsers() *[]models.Post
-	GetPostsByUser(userId uuid.UUID) *[]models.Post
-	CreatePost(post models.Post)
-	UpdatePost(post models.Post)
-	DeletePost(postId models.Post)
+	GetPostById(postId uuid.UUID) error
+	GetUserPosts(userId uuid.UUID) (*[]models.Post,error)
+	GetFriendsPosts(userId uuid.UUID) (*[]models.Post,error)
+	GetLatestPostsByRandomUsers() (*[]models.Post,error)
+	GetPostsByUser(userId uuid.UUID) (*[]models.Post,error)
+	CreatePost(post models.Post) error
+	UpdatePost(post models.Post) error
+	DeletePost(postId models.Post) error
 }

@@ -10,11 +10,11 @@ import (
 )
 
 type Game struct {
-	Id          uuid.UUID
-	Image       string
-	Name        string
-	ReleaseDate time.Time
-	Category    enums.GameCategory
+	Id          uuid.UUID `bson:"_id"`
+	Image       string `bson:"Image"`
+	Name        string `bson:"Name"`
+	ReleaseDate time.Time `bson:"ReleaseDate"`
+	Category    enums.GameCategory `bson:"Category"`
 }
 
 func NewGame(id uuid.UUID, image, name string, releaseDate time.Time, category enums.GameCategory) (*Game, []error) {

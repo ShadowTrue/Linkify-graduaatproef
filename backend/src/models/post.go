@@ -9,11 +9,11 @@ import (
 )
 
 type Post struct {
-	Id        uuid.UUID
-	Sender    uuid.UUID
-	Content   string
-	Image     string
-	TimeStamp time.Time
+	Id        uuid.UUID `bson:"_id"`
+	Sender    uuid.UUID `bson:"Sender"`
+	Content   string `bson:"Content"`
+	Image     string `bson:"Image"`
+	TimeStamp time.Time `bson:"TimeStamp"`
 }
 
 func NewPost(id, sender uuid.UUID, content, image string, timeStamp time.Time) (*Post, []error) {

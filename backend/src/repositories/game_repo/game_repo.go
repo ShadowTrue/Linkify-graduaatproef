@@ -7,10 +7,10 @@ import (
 )
 
 type GameRepo interface {
-	GetGameById(gameId uuid.UUID) *models.Game
-	GetAllGames() *[]models.Game
-	CreateGame(game models.Game)
-	UpdateUserGamesList(game []models.Game)
-	UpdateGame (game models.Game)
-	DeleteGame (gameId uuid.UUID)
+	GetGameById(gameId uuid.UUID) (*models.Game,error)
+	GetAllGames() (*[]models.Game, error)
+	CreateGame(game models.Game) error
+	UpdateUserGamesList(game []models.Game) error
+	UpdateGame (game models.Game) error
+	DeleteGame (gameId uuid.UUID) error
 }

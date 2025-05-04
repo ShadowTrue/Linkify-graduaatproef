@@ -8,11 +8,11 @@ import (
 )
 
 type UserRepo interface {
-	GetUserByGames(games []models.Game) *[]models.User
-	GetUserById(id uuid.UUID) *models.User
-	GetusersByGameCategories(cat []enums.GameCategory) *[]models.User
-	GetUsersByFullName(name string) *[]models.User
-	CreateUser(usr *models.User)
-	UpdateUser(usr *models.User)
-	DeleteUser(id uuid.UUID)
+	GetUserByGames(games []models.Game) (*[]models.User,error)
+	GetUserById(id uuid.UUID) (*models.User,error)
+	GetusersByGameCategories(cat []enums.GameCategory) (*[]models.User,error)
+	GetUsersByFullName(name string) (*[]models.User,error)
+	CreateUser(usr *models.User) error
+	UpdateUser(usr *models.User) error
+	DeleteUser(id uuid.UUID) error
 }

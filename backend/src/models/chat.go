@@ -7,9 +7,9 @@ import (
 )
 
 type Chat struct {
-	Id           uuid.UUID
-	Participants []uuid.UUID
-	Admins       []uuid.UUID
+	Id           uuid.UUID `bson:"_id"`
+	Participants []uuid.UUID `bson:"Participants"`
+	Admins       []uuid.UUID `bson:"Admins"`
 }
 
 func NewChat(id uuid.UUID, participants, admins []uuid.UUID) (*Chat, []error) {

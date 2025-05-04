@@ -7,9 +7,9 @@ import (
 )
 
 type MessageRepo interface {
-	GetMessageById(messageId uuid.UUID,page int,limit int) *models.Message
-	GetMessagesByChat(chatId uuid.UUID) *[]models.Message
-	CreateMessage(message models.Message)
-	UpdateMessage(message models.Message)
-	DeleteMesage(msgId uuid.UUID)
+	GetMessageById(messageId uuid.UUID,page int,limit int) (*models.Message,error)
+	GetMessagesByChat(chatId uuid.UUID) (*[]models.Message,error)
+	CreateMessage(message models.Message) error
+	UpdateMessage(message models.Message) error
+	DeleteMesage(msgId uuid.UUID) error
 }

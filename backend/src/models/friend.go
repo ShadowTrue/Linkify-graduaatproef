@@ -9,12 +9,12 @@ import (
 )
 
 type Friend struct {
-	Id             uuid.UUID
-	ProfilePicture string
-	FirstName      string
-	LastName       string
-	FullName       string
-	BirthDate      time.Time
+	Id             uuid.UUID `bson:"_id"`
+	ProfilePicture string `bson:"ProfilePicture"`
+	FirstName      string `bson:"FirstName"`
+	LastName       string `bson:"LastName"`
+	FullName       string `bson:"FullName"`
+	BirthDate      time.Time `bson:"BirthDate"`
 }
 
 func NewFriend(id uuid.UUID, profilePicture, firstName, lastName, fullName string, birthday time.Time) (*Friend, []error) {

@@ -9,15 +9,15 @@ import (
 )
 
 type User struct {
-	Id             uuid.UUID
-	ProfilePicture string
-	Email          string
-	Username       string
-	FirstName      string
-	LastName       string
-	Birthday       time.Time
-	Country        string
-	CreatedOn      time.Time
+	Id             uuid.UUID `bson:"_id"`
+	ProfilePicture string `bson:"ProfilePicture"`
+	Email          string `bson:"Email"`
+	Username       string `bson:"Username"`
+	FirstName      string `bson:"FirtName"`
+	LastName       string `bson:"LastName"`
+	Birthday       time.Time `bson:"Birthday"`
+	Country        string `bson:"Country"`
+	CreatedOn      time.Time `bson:"CreatedOn"`
 }
 
 // Constructor for User
