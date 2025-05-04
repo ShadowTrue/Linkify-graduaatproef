@@ -1,6 +1,7 @@
 package main
 
 import (
+	dbservice "backend/src/db_service"
 	"context"
 	"fmt"
 	"log"
@@ -16,7 +17,7 @@ func main() {
 
 	db := createDbConnection()
 
-	db.Collection("Users")
+	usrService := dbservice.CreateUserService(*db)
 	
 }
 
